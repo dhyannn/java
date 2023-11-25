@@ -1,0 +1,112 @@
+import java.util.Scanner;
+
+public class Performance {
+    private int[] marks;
+
+    // Constructor
+    public Performance() {
+        marks = new int[10];
+    }
+
+    // Method to read marks into the array
+    public void readMarks() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter marks for 10 students:");
+
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Student " + (i + 1) + ": ");
+            marks[i] = scanner.nextInt();
+        }
+    }
+
+    // Method to return the highest mark scored in the class
+    public int highestMark() {
+        int highest = marks[0];
+        for (int i = 1; i < marks.length; i++) {
+            if (marks[i] > highest) {
+                highest = marks[i];
+            }
+        }
+        return highest;
+    }
+
+    // Method to return the least mark scored in the class
+    public int leastMark() {
+        int least = marks[0];
+        for (int i = 1; i < marks.length; i++) {
+            if (marks[i] < least) {
+                least = marks[i];
+            }
+        }
+        return least;
+    }
+
+    // Method to return the mode
+    public int getMode() {
+        int mode = marks[0];
+        int maxFrequency = 1;
+
+        for (int i = 0; i < marks.length; i++) {
+            int currentFrequency = 1;
+
+            for (int j = i + 1; j < marks.length; j++) {
+                if (marks[i] == marks[j]) {
+                    currentFrequency++;
+                }
+            }
+
+            if (currentFrequency > maxFrequency || (currentFrequency == maxFrequency && marks[i] > mode)) {
+                mode = marks[i];
+                maxFrequency = currentFrequency;
+            }
+        }
+
+        return mode;
+    }
+
+    // Method to return the frequency at mode
+    public int getFreqAtMode() {
+        int mode = getMode();
+        int frequency = 0;
+
+        for (int mark : marks) {
+            if (mark == mode) {
+                frequency++;
+            }
+        }
+
+        return frequency;
+    }
+
+    // Method to display the results
+    public void display() {
+        System.out.println("Highest Mark: " + highestMark());
+        System.out.println("Least Mark: " + leastMark());
+        System.out.println("Mode: " + getMode());
+        System.out.println("Mode Frequency: " + getFreqAtMode());
+    }
+
+    public static void main(String[] args) {
+        Performance performance = new Performance();
+        performance.readMarks();
+        performance.display();
+    }
+}
+
+
+output:
+Enter marks for 10 students:
+Student 1: 50
+Student 2: 60
+Student 3: 90
+Student 4: 100
+Student 5: 76
+Student 6: 85
+Student 7: 98
+Student 8: 35
+Student 9: 25
+Student 10: 66
+Highest Mark: 100
+Least Mark: 25
+Mode: 100
+Mode Frequency: 1
