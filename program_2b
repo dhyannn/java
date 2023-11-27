@@ -1,0 +1,47 @@
+public class ShareTrader {
+    private static int maxProfit;
+
+    // Static method to find the maximum profit with at most 2 transactions
+    public static void findMaxProfit(int[] prices) {
+        int n = prices.length;
+
+        if (n < 2) {
+            System.out.println("Not enough prices for trading.");
+            return;
+        }
+
+        int[] profit = new int[n];
+
+        // Calculate profit with one transaction
+        int minPrice = prices[0];
+        for (int i = 1; i < n; i++) {
+            minPrice = Math.min(minPrice, prices[i]);
+            profit[i] = Math.max(profit[i - 1], prices[i] - minPrice);
+        }
+
+        // Calculate profit with two transactions
+        int maxPrice = prices[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            maxPrice = Math.max(maxPrice, prices[i]);
+            profit[i] = Math.max(profit[i], maxPrice - prices[i]);
+        }
+
+        // Calculate the maximum profit with at most 2 transactions
+        maxProfit = 0;
+        for (int i = 0; i < n; i++) {
+            maxProfit = Math.max(maxProfit, profit[i]);
+        }
+
+        System.out.println("Maximum Profit: " + maxProfit);
+    }
+
+    public static void main(String[] args) {
+        // Sample Test Case 1
+        int[] prices1 = {10, 22, 5, 75, 65, 80};
+        findMaxProfit(prices1);
+
+        // Sample Test Case 2
+        int[] prices2 = {2, 30, 15, 10, 8, 25, 80};
+        findMaxProfit(prices2);
+    }
+}
