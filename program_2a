@@ -1,0 +1,53 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+
+public class TopKFrequentNumbers {
+    private static int[] numbers;
+
+    // Static method to find and print the top K numbers with the highest occurrences
+    public static void findTopKFrequentNumbers(int K) {
+        // Create a frequency map to store the occurrences of each number
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+
+        // Populate the frequency map
+        for (int num : numbers) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Create a max heap (PriorityQueue) to store entries based on frequency (and value in case of ties)
+        PriorityQueue<Map.Entry<Integer, Integer>> maxHeap = new PriorityQueue<>(
+                (entry1, entry2) -> {
+                    if (entry1.getValue() != entry2.getValue()) {
+                        return entry2.getValue() - entry1.getValue(); // Compare by frequency
+                    } else {
+                        return entry2.getKey() - entry1.getKey(); // If tied, compare by value in descending order
+                    }
+                }
+        );
+
+        // Add entries from the frequency map to the max heap
+        maxHeap.addAll(frequencyMap.entrySet());
+
+        // Print the top K numbers with the highest occurrences
+        System.out.println("Top " + K + " numbers with the highest occurrences:");
+
+        for (int i = 0; i < K; i++) {
+            Map.Entry<Integer, Integer> entry = maxHeap.poll();
+            System.out.print(entry.getKey() + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        // Sample Test Case 1
+        numbers = new int[]{3, 1, 4, 4, 5, 2, 6, 1};
+        int K1 = 2;
+        findTopKFrequentNumbers(K1);
+        System.out.println(); // newline for clarity
+
+        // Sample Test Case 2
+        numbers = new int[]{7, 10, 11, 5, 2, 5, 5, 7, 11, 8, 9};
+        int K2 = 4;
+        findTopKFrequentNumbers(K2);
+    }
+}
