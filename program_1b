@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class AlphabetWarGame2 {
+    private static final String LEFT_SIDE = "wpbs";
+    private static final String RIGHT_SIDE = "mqdz";
+
+    private int getStrength(char letter) {
+        if (LEFT_SIDE.indexOf(letter) != -1) {
+            switch (letter) {
+                case 'w':
+                    return 4;
+                case 'p':
+                    return 3;
+                case 'b':
+                    return 2;
+                case 's':
+                    return 1;
+            }
+        } else if (RIGHT_SIDE.indexOf(letter) != -1) {
+            switch (letter) {
+                case 'm':
+                    return 4;
+                case 'q':
+                    return 3;
+                case 'd':
+                    return 2;
+                case 'z':
+                    return 1;
+            }
+        }
+        return 0; // Default strength for characters not in either side
+    }
+
+    public String determineWinner(String word) {
+        int leftStrength = 0;
+        int rightStrength = 0;
+
+        for (char letter : word.toCharArray()) {
+            int strength = getStrength(letter);
+            leftStrength += LEFT_SIDE.indexOf(letter) != -1 ? strength : 0;
+            rightStrength += RIGHT_SIDE.indexOf(letter) != -1 ? strength : 0;
+        }
+
+        if (leftStrength > rightStrength) {
+            return "Left side wins!";
+        } else if (rightStrength > leftStrength) {
+            return "Right side wins!";
+        } else {
+            return "Let's fight again!";
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        AlphabetWarGame game = new AlphabetWarGame();
+
+        System.out.print("Enter a word: ");
+        String userInput = scanner.nextLine();
+
+        String result = game.determineWinner(userInput);
+        System.out.println(result);
+    }
+}
