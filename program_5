@@ -1,0 +1,109 @@
+// Lab 5 Program 1
+// Description - Create an interface containing two abstract methods, deposit amounts into banks A,B and C
+// Bank A,B and C implements interface each defining that two methods. Given provided interest rate based on the balance
+// Display balance and interest rate for each bank
+
+// Creation of interface class
+
+interface BankInterface {
+
+    // Declaration of two abstract methods
+
+    double getBalance();
+    double getInterestRate();
+
+}
+
+// Creation of BankA
+
+class BankOne implements BankInterface{
+
+
+    // Variable to store the balance
+    private double Balance = 10000;
+
+    // Method to return the available balance
+    public double getBalance(){
+
+        return Balance;
+
+    }
+
+    // Method to display the interest rate based on the balance
+    public double getInterestRate(){
+
+        return 0.07; // Given interest rate
+
+    }
+}
+
+// Creation of BankB
+
+class BankTwo implements BankInterface{
+
+    // Variable to store the balance
+    private double Balance = 150000;
+
+    // Method to return the available balance
+    public double getBalance(){
+
+        return Balance;
+    }
+
+    // Method to display the interest rate based on the balance
+    public double getInterestRate(){
+
+        return 0.074; // Given interest rate
+
+    }
+}
+
+// Creation of BankC
+
+class BankThree implements BankInterface{
+
+    // Variable to store the balance
+    private double Balance = 200000;
+
+
+    // Method to return the available balance
+    public double getBalance(){
+
+        return Balance;
+
+    }
+
+    // Method to display the interet rate based on the balance
+    public double getInterestRate(){
+
+        return 0.079; // Given interest rate
+
+    }
+}
+
+// Main Method
+
+class BankInterfaceMain{
+    public static void main(String[] args) {
+
+        // Instantiating objects for each class
+        // Calculating interest - Interest(expressed in decimal, ie 7% as 0.07) * Balance
+
+        System.out.println("");
+        System.out.println("Check the Balance and Provided Interest Rate");
+        System.out.println("--------------------------------------------");
+
+        BankOne bankA = new BankOne();
+        System.out.println("Balance in Bank A : " + bankA.getBalance());
+        System.out.println("Interest Rate provided for Bank A : " + String.format("%.2f",bankA.getInterestRate() * bankA.getBalance()));
+
+        BankTwo bankB = new BankTwo();
+        System.out.println("Balance in Bank B : " + bankB.getBalance());
+        System.out.println("Interest Rate provided for Bank B : " + String.format("%.2f",bankB.getInterestRate() * bankB.getBalance() ));
+
+        BankThree bankC = new BankThree();
+        System.out.println("Balance in Bank C : " + bankC.getBalance());
+        System.out.println("Interest Rate provided for Bank C : " + String.format("%.2f",bankC.getInterestRate() * bankC.getBalance()));
+
+    }
+}
