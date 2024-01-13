@@ -180,11 +180,11 @@ public class AmazonCRM {
 
         // Creation of customers, products and orders
        
-         Customer customer1 = new Customer(234, "Badri", 625013);
-         Customer customer2 = new Customer(235, "Jacob", 625009);
+         Customer customer1 = new Customer(234, "dhyan", 625013);
+         Customer customer2 = new Customer(235, "dev", 625009);
 
-         Product product1 = new Product(777, "Hp 15s");
-         Product product2 = new Product(888, "Mac");
+         Product product1 = new Product(777, "Hp i5");
+         Product product2 = new Product(888, "hp i7");
 
          Order order1 = new Order(144, customer1);
         //  Order order2 = new Order(2, customer1);
